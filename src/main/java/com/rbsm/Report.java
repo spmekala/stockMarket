@@ -12,4 +12,8 @@ public class Report {
         this.adsh = adsh;
         this.name = name;
     }
+
+    public void addValue(String tag, double value) {
+        data.put(tag, value);
+    }
 }
