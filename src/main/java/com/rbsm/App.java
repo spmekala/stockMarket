@@ -19,9 +19,9 @@ public class App
 //        TabularResult tabularResult = session.getDataSet(
 //                DataSetRequest.Builder.of("WIKI/AAPL").build());
 //        System.out.println(tabularResult.toPrettyPrintedString());
-        Parser parser = new Parser();
-        HashMap<String, Report> entries = parser.readSubFile();
 
+        HashMap<String, Report> entries = Parser.readSubFile();
+        Parser.readNumFile(entries);
         System.out.println("entries: " + entries.size());
     }
 }

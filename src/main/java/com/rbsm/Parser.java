@@ -8,28 +8,41 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Parser {
-    private static File sub = new File("../../../res/sub.tsv");
-    private static File num = new File("../../../res/num.tsv");
+    private static File sub = new File("/Users/raghavbhat/stockMarket/src/res/sub.tsv");
+    private static File num = new File("/Users/raghavbhat/stockMarket/src/res/num.tsv");
 
     public static HashMap<String, Report> readSubFile() {
         try {
             HashMap<String, Report> reports = new HashMap<String, Report>();
             Scanner subScan = new Scanner(sub);
-//            Scanner numScan = new Scanner(num);
 
             while (subScan.hasNextLine()) {
                 String line = subScan.nextLine();
                 String[] splitLine = line.split("\t");
                 reports.put(splitLine[0], new Report(splitLine[0], splitLine[2]));
-
-//                line = numScan.nextLine();
-//                splitLine = line.split("\t");
-//                reports.getFirst().addValue(splitLine[]);
             }
+
             return reports;
         } catch (Exception e) {
-            System.out.println("Parser Error: " + e.getMessage());
+            System.out.println("Sub parser Error: " + e.getMessage());
         }
         return null;
+    }
+
+    public static void readNumFile(HashMap<String, Report> reports) {
+        try {
+            Scanner scan = new Scanner(num);
+            scan.nextLine();
+            while (scan.hasNextLine()) {
+                String line = scan.nextLine();
+                String[] splitLine = line.split("\t");
+//                    System.out.println("\nadsh: " + splitLine[0] +"\ttag: " + splitLine[1] + "\tval: " + splitLine[8]);
+                if (splitLine.length > 8)
+                    reports.get(splitLine[0]).addValue(splitLine[1], splitLine[8]);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Num parser Error: " + e.getMessage() + e.toString());
+        }
     }
 }
